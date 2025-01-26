@@ -1,0 +1,6 @@
+.hover_transaction_section {
+  transition: all 50ms ease-in-out;
+}
+.hover_transaction_section:hover {
+  border-bottom: 2px solid;
+}

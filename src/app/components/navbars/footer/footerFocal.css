@@ -1,0 +1,9 @@
+.support_center li {
+  font-weight: lighter;
+}
+
+.support_center p {
+  padding-bottom: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}

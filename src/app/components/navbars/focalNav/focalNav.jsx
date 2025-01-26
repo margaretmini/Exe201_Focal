@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import "./focalNav.css";
 import { Drawer } from "antd";
 import CartDrawer from "../../cart/cartDrawer";
+import DropDownUsername from "./dropDownUsername";
 export default function FocalNav() {
   const [openCart, setOpenCart] = useState(false);
+  const [auth, setAuth] = useState(true);
 
   const showDrawer = () => {
     setOpenCart(true);
@@ -31,9 +33,14 @@ export default function FocalNav() {
       <Link to={`/blog`} className="hover_transaction_section">
         Bài viết
       </Link>
-      <Link to={`/login`} className="hover_transaction_section">
-        Đăng nhập
-      </Link>
+      {!auth ? (
+        <Link to={`/login`} className="hover_transaction_section">
+          Đăng nhập
+        </Link>
+      ) : (
+        <DropDownUsername />
+      )}
+
       <CartDrawer />
     </nav>
   );

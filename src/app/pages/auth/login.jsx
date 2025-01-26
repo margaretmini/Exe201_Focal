@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function login() {
   return (
     <div className="flex flex-row justify-center items-center ">
-      <div className=" w-[600px] h-[560px] pt-16">
+      <div className=" w-[600px] h-[440px] pt-16">
         <h3 className="text-center">ĐĂNG NHẬP</h3>
         <div className="flex flex-row justify-between text-gray-500 pb-1">
           <p>Địa chỉ Email*</p>

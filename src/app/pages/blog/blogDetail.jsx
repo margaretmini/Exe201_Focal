@@ -35,7 +35,7 @@ export default function blogDetail() {
       </div>
       <div className="flex flex-row flex-wrap items-end mt-40">
         <img
-          className="w-[350px] h-[500px]"
+          className="w-[340px] h-[500px]"
           src="https://i.pinimg.com/736x/1d/ff/74/1dff74978764853e64b84d6965727619.jpg"
         />
         <img

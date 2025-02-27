@@ -18,10 +18,10 @@ export default function FocalNav() {
 
   return (
     <nav className="h-[100px] flex flex-row justify-between items-center px-10 placeholder-teal-400 mb-20">
-      <Link to={`/`} className="hover_transaction_section">
+      <Link to={`/landing`} className="hover_transaction_section">
         Giới thiệu
       </Link>
-      <Link to={`/`} className="hover_transaction_section">
+      <Link to={`/product`} className="hover_transaction_section">
         Sản phẩm
       </Link>
       <Link to={`/policy`} className="hover_transaction_section">

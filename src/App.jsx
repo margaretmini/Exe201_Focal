@@ -11,15 +11,16 @@ import FooterFocal from "./app/components/navbars/footer/footerFocal";
 
 // IMPORT PAGES
 import HomePage from "./app/pages/homepage/homePage";
-
 import Login from "./app/pages/auth/login";
 import Register from "./app/pages/auth/register";
-
 import Blog from "./app/pages/blog/blog";
 import BlogDetail from "./app/pages/blog/blogDetail";
 import Cart from "./app/pages/cart/cart";
 import Policy from "./app/pages/policy/policy";
 import PrivacyPolicy from "./app/pages/policy/privacyPolicy";
+import Product from "./app/pages/product/product";
+import Landing from "./app/pages/landing/landing";
+import ProductDetail from "./app/pages/product/ProductDetail";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
+        <Route path="/landing" element={<Landing />}></Route>
+        <Route path="/product" element={<Product />}></Route>
+        <Route path="/product/:productId" element={<ProductDetail />}></Route>
         <Route path="/policy" element={<Policy />}></Route>
         <Route path="/privacy_policy" element={<PrivacyPolicy />}></Route>
         <Route path="/login" element={<Login />}></Route>

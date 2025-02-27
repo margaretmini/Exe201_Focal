@@ -1,0 +1,78 @@
+.homepage-welcome{
+    font-weight: 600;
+    font-family: Helvetica;
+    font-size: 100px;
+    text-align: center;
+    border-bottom: 2px solid #000000;
+    border-top: 2px solid #000000;
+}
+
+.homepage-welcome-description{
+    font-size: 41px;
+    padding-left: 20px;
+    border-bottom: 2px solid #000000;
+}
+
+.description1{
+    text-align: start;
+    align-items: center;
+    border-left: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    padding: 20px;
+}
+.description2{
+    border-right: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    align-items: center;
+}
+
+.title{
+    justify-content: start;
+    border-top: 2px solid #000000;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.mb-24{
+    text-align: start;
+    
+    border-top: 2px solid #000000;
+    padding: 20px;
+}
+
+.homepage-contact1{
+    border: 2px solid #000000;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+.homepage-contact2{
+    border: 2px solid #000000;
+    justify-content: center;
+    text-align: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.homepage-contact3{
+    border: 2px solid #000000;
+    justify-content: center;
+    text-align: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.homepage-contact4{
+    border: 2px solid #000000;
+    justify-content: center;
+    text-align: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.homepage-contact2-p{
+    border-bottom: 2px solid #000000;
+}
+.homepage-contact3-p{
+    border-bottom: 2px solid #000000;
+}
+.homepage-contact4-p{
+    border-bottom: 2px solid #000000;
+}

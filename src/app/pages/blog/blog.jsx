@@ -1,42 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./blog.css";
 import Title from "antd/es/skeleton/Title";
 import { Link } from "react-router-dom";
+import blogApi from "../../api/blogApi";
 export default function blog() {
-  const data = [
-    {
-      id: 1,
-      title: "WELCOME TO PLANET YOON",
-      image:
-        "https://i.pinimg.com/736x/00/4f/f9/004ff9de4d01345888dc93d4dd04d85c.jpg",
-      description:
-        "Kim Jones enters the orbit of Yoon Ahn for a conversation across time zones, covering couture houses, Alaskan survival shows and more for GREATEST 09.",
-    },
-    {
-      id: 2,
-      title: "ALL EYEZ ON PESO PLUMA",
-      image:
-        "https://i.pinimg.com/736x/00/4f/f9/004ff9de4d01345888dc93d4dd04d85c.jpg",
-      description:
-        "From his breakthrough record 'Génesis' to his new album 'Éxodo,' tracing the Biblical ascendance of La Doble P in GREATEST 09.",
-    },
-    {
-      id: 3,
-      title: "ALL EYEZ ON PESO PLUMA",
-      image:
-        "https://i.pinimg.com/736x/00/4f/f9/004ff9de4d01345888dc93d4dd04d85c.jpg",
-      description:
-        "From his breakthrough record 'Génesis' to his new album 'Éxodo,' tracing the Biblical ascendance of La Doble P in GREATEST 09.",
-    },
-    {
-      id: 4,
-      title: "EVERYTHING YOU NEED TO KNOW ABOUT Y PROJECT IN 1000 WORDS",
-      image:
-        "https://i.pinimg.com/736x/00/4f/f9/004ff9de4d01345888dc93d4dd04d85c.jpg",
-      description:
-        "From his breakthrough record 'Génesis' to his new album 'Éxodo,' tracing the Biblical ascendance of La Doble P in GREATEST 09.",
-    },
-  ];
+  const [data, setData] = useState();
+  useEffect(() => {
+    const getAllBlog = async () => {
+      try {
+        const response = await blogApi.blog();
+        setData(response?.data);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+        messageApi.error("Có lỗi khi đăng nhập, hãy thử lại !");
+      }
+    };
+
+    getAllBlog();
+  }, []);
+
   return (
     <div className="flex flex-row justify-start gap-x-[104px] gap-y-20 px-20 flex-wrap">
       {data?.map((blog) => (
@@ -44,11 +27,16 @@ export default function blog() {
           to={`/blog/${blog.id}`}
           className="hover:shadow-2xl transition-all duration-300 hover:p-4 h-[640px] w-[380px]"
         >
-          <div className="flex flex-col blog_container" key={blog.id}>
-            <img src={blog?.image}></img>
+          <div className="flex flex-col blog_container" key={blog.postId}>
+            <img
+              src={
+                blog?.image ||
+                "https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
+              }
+            ></img>
             <span>
               <p className="font-semibold py-6 truncate">{blog.title}</p>
-              <p className="line-clamp-4 text-gray-700">{blog.description}</p>
+              <p className="line-clamp-4 text-gray-700">{blog.content}</p>
             </span>
           </div>
         </Link>

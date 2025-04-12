@@ -1,32 +1,46 @@
 import { Input } from "antd";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi.js";
+import { message } from "antd";
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const [messageApi, contextHolder] = message.useMessage();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
   const handleLogin = async () => {
-    try {
-      const response = await authApi.login({
-        email: "admin@example.com",
-        password: "12345",
-      });
-
-      console.log("Login thành công:", response.data);
-    } catch (error) {
-      console.error("Lỗi khi login:", error?.response?.data || error.message);
+    if (!password || !email) {
+      messageApi.info("Hãy điền đầy đủ thông tin đăng nhập !");
+      return;
     }
 
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Ghi nhớ đăng nhập:", remember);
+    try {
+      const response = await authApi.login({
+        email,
+        password,
+      });
+      const token = jwtDecode(response.data.data);
+      localStorage.setItem("decodeToken", JSON.stringify(token));
+      localStorage.setItem("undecodeToken", response.data.data);
+      messageApi.success("Đăng nhập thành công !");
+      navigate("/");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+      messageApi.error("Có lỗi khi đăng nhập, hãy thử lại !");
+    }
   };
 
   return (
     <div className="flex flex-row justify-center items-center ">
+      {contextHolder}
+
       <div className="w-[600px] h-[440px] pt-16">
         <h3 className="text-center">ĐĂNG NHẬP</h3>
 

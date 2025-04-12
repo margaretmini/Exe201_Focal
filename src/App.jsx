@@ -26,7 +26,6 @@ import Information from "./app/pages/profile/information";
 import Favorite from "./app/pages/profile/favorite";
 import Order from "./app/pages/profile/order";
 import Bargan from "./app/pages/profile/bargan";
-import RentBeing from "./app/pages/profile/rentBeing";
 import Delivery from "./app/pages/profile/delivery";
 import Payment from "./app/pages/profile/payment";
 import Chat from "./app/pages/profile/chat";
@@ -55,7 +54,6 @@ function App() {
           <Route path="favorite" element={<Favorite />}></Route>
           <Route path="order" element={<Order />}></Route>
           <Route path="bargan" element={<Bargan />}></Route>
-          <Route path="rentBeing" element={<RentBeing />}></Route>
           <Route path="delivery" element={<Delivery />}></Route>
           <Route path="payment" element={<Payment />}></Route>
           <Route path="chat" element={<Chat />}></Route>

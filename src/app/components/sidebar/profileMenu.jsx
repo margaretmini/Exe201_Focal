@@ -1,18 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("decodeToken");
+    localStorage.removeItem("undecodeToken");
+    navigate("/");
+  };
   return (
-    <div className="w-80 bg-white min-h-screen pl-14 border-r text-left">
+    <div className="w-[460px] bg-white min-h-screen pl-14 border-r text-left">
       <p className="text-[24px] font-semibold mb-6">TÀI KHOẢN</p>
 
       <ul className="space-y-2 text-[16px]">
         <li>
-          <Link to="/profile/likes" className="hover:underline">
+          <Link to="/profile/favorite" className="hover:underline">
             Thích
           </Link>
         </li>
         <li>
-          <Link to="/profile/orders" className="hover:underline">
+          <Link to="/profile/order" className="hover:underline">
             Đặt hàng
           </Link>
         </li>
@@ -49,9 +56,12 @@ const Sidebar = () => {
       </ul>
 
       <div className="mt-8">
-        <Link to="/logout" className="text-sm hover:underline text-red-500">
+        <button
+          onClick={logout}
+          className="text-sm hover:underline text-red-500"
+        >
           Đăng xuất
-        </Link>
+        </button>
       </div>
     </div>
   );

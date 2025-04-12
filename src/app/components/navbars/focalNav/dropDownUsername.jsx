@@ -7,51 +7,52 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 const items = [
   {
     key: "1",
     label: (
-      <div className="flex flex-row gap-4">
+      <Link to={`/profile/favorite`} className="flex flex-row gap-4">
         <LikeOutlined />
         Yêu thích
-      </div>
+      </Link>
     ),
   },
   {
     key: "2",
     label: (
-      <div className="flex flex-row gap-4">
+      <Link to={`/profile/order`} className="flex flex-row gap-4">
         <ShoppingCartOutlined />
         Đặt hàng
-      </div>
+      </Link>
     ),
   },
   {
     key: "3",
     label: (
-      <div className="flex flex-row gap-4">
+      <Link to={`/profile/bargan`} className="flex flex-row gap-4">
         <FileSearchOutlined />
-        Trả giá{" "}
-      </div>
+        Trả giá
+      </Link>
     ),
   },
   {
     key: "4",
     label: (
-      <div className="flex flex-row gap-4">
+      <Link to={`/profile/info`} className="flex flex-row gap-4">
         <UserOutlined />
         Hồ sơ
-      </div>
+      </Link>
     ),
   },
 
   {
     key: "5",
     label: (
-      <div className="flex flex-row pt-2 gap-4">
+      <button className="flex flex-row pt-2 gap-4">
         <LogoutOutlined />
         Đăng xuất
-      </div>
+      </button>
     ),
   },
 ];

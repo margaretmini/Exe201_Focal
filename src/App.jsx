@@ -21,6 +21,15 @@ import PrivacyPolicy from "./app/pages/policy/privacyPolicy";
 import Product from "./app/pages/product/product";
 import Landing from "./app/pages/landing/landing";
 import ProductDetail from "./app/pages/product/ProductDetail";
+import Profile from "./app/pages/profile/userProfile";
+import Information from "./app/pages/profile/information";
+import Favorite from "./app/pages/profile/favorite";
+import Order from "./app/pages/profile/order";
+import Bargan from "./app/pages/profile/bargan";
+import RentBeing from "./app/pages/profile/rentBeing";
+import Delivery from "./app/pages/profile/delivery";
+import Payment from "./app/pages/profile/payment";
+import Chat from "./app/pages/profile/chat";
 
 function App() {
   return (
@@ -39,6 +48,18 @@ function App() {
         <Route path="/blog" element={<Blog />}></Route>
         <Route path="/blog/:blogId" element={<BlogDetail />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+
+        {/* OUTLET USING*/}
+        <Route path="/profile" element={<Profile />}>
+          <Route path="info" index element={<Information />}></Route>
+          <Route path="favorite" element={<Favorite />}></Route>
+          <Route path="order" element={<Order />}></Route>
+          <Route path="bargan" element={<Bargan />}></Route>
+          <Route path="rentBeing" element={<RentBeing />}></Route>
+          <Route path="delivery" element={<Delivery />}></Route>
+          <Route path="payment" element={<Payment />}></Route>
+          <Route path="chat" element={<Chat />}></Route>
+        </Route>
       </Routes>
       <FooterFocal />
     </>

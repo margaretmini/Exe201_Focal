@@ -1,74 +1,112 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import userApi from "../../api/userApi.js";
+import { message } from "antd";
 
 const ProfileForm = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    dateOfBirth: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await userApi.updateProfile(data); // Gọi API cập nhật
+      messageApi.success("Cập nhật hoàn tất !");
+    } catch (error) {
+      console.error(
+        "Lỗi khi cập nhật:",
+        error?.response?.data || error.message
+      );
+    }
+  };
+
   useEffect(() => {
     const getProfile = async () => {
       try {
         const response = await userApi.getProfile();
-        console.log("lay du lieu thành công:", response.data);
+        setData(response.data?.data);
       } catch (error) {
-        console.error("Lỗi khi login:", error?.response?.data || error.message);
+        console.error(
+          "Lỗi khi lấy thông tin:",
+          error?.response?.data || error.message
+        );
       }
     };
-
     getProfile();
   }, []);
-
   return (
     <div className="w-full mx-auto py-10 pr-96 pl-40">
-      <form className="space-y-6">
-        {/* Họ tên */}
+      {contextHolder}
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm mb-1">Họ Tên</label>
+          <label className="block text-sm mb-1">Họ & Tên đệm</label>
           <input
             type="text"
-            defaultValue="ABC123"
+            name="firstName"
+            value={data?.firstName || ""}
+            onChange={handleChange}
             className="w-full border-b border-black outline-none"
           />
         </div>
 
-        {/* Tên đăng nhập */}
         <div>
-          <label className="block text-sm mb-1">Tên đăng nhập</label>
+          <label className="block text-sm mb-1">Tên</label>
           <input
             type="text"
-            defaultValue="ABC123"
+            name="lastName"
+            value={data?.lastName || ""}
+            onChange={handleChange}
             className="w-full border-b border-black outline-none"
           />
         </div>
 
-        {/* Email */}
         <div>
-          <label className="block text-sm mb-1">Email</label>
+          <label className="block text-sm mb-1">Email & Tên Đăng Nhập</label>
           <input
             type="email"
-            defaultValue="ABC123"
+            name="email"
+            value={data?.email || ""}
+            onChange={handleChange}
             className="w-full border-b border-black outline-none"
           />
         </div>
 
-        {/* Điện thoại */}
         <div>
           <label className="block text-sm mb-1">Điện Thoại</label>
           <input
             type="text"
-            defaultValue="ABC123"
+            name="phone"
+            value={data?.phone || ""}
+            onChange={handleChange}
             className="w-full border-b border-black outline-none"
           />
         </div>
 
-        {/* Sản phẩm */}
         <div>
-          <label className="block text-sm mb-1">Sản phẩm</label>
+          <label className="block text-sm mb-1">Ngày Sinh</label>
           <input
-            type="text"
-            placeholder="Tìm kiếm..."
+            type="date"
+            name="dateOfBirth"
+            value={data?.dateOfBirth || ""}
+            onChange={handleChange}
             className="w-full border-b border-black outline-none"
           />
         </div>
 
-        {/* Hình ảnh */}
         <div>
           <label className="block text-sm mb-1">Hình ảnh</label>
           <input
@@ -80,7 +118,6 @@ const ProfileForm = () => {
           <p className="text-xs text-gray-400 mt-1">Chèn 5 ảnh</p>
         </div>
 
-        {/* Nút hoàn thành */}
         <div>
           <button
             type="submit"

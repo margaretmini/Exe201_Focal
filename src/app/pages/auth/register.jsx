@@ -1,6 +1,7 @@
-import { Input } from "antd";
+import { Input, message } from "antd";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import authApi from "../../api/authApi";
 import "./register.css";
 
 export default function Register() {
@@ -11,7 +12,6 @@ export default function Register() {
     email: "",
     password: "",
     confirmPassword: "",
-    username: "",
   });
 
   const [checked, setChecked] = useState({
@@ -21,6 +21,7 @@ export default function Register() {
   });
 
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -41,20 +42,29 @@ export default function Register() {
   );
   const allChecked = Object.values(checked).every((val) => val === true);
   const passwordsMatch = formData.password === formData.confirmPassword;
-
   const canSubmit = allFieldsFilled && allChecked && passwordsMatch;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!passwordsMatch) {
       setError("Mật khẩu và xác nhận mật khẩu không khớp.");
       return;
     }
 
-    setError("");
-    console.log("Thông tin đăng ký:", {
-      ...formData,
-      ...checked,
-    });
+    try {
+      setError("");
+      const payload = {
+        ...formData,
+        ...checked,
+      };
+
+      await authApi.register(payload);
+      message.success("Đăng ký thành công!");
+      navigate("/login");
+    } catch (error) {
+      const msg =
+        error?.response?.data?.message || "Đăng ký thất bại. Vui lòng thử lại!";
+      message.error(msg);
+    }
   };
 
   return (
@@ -109,15 +119,7 @@ export default function Register() {
             value={formData.confirmPassword}
             onChange={handleChange}
           />
-          {/* Hiện lỗi nếu password không khớp */}
           {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
-          <Input
-            name="username"
-            placeholder="TÊN ĐĂNG NHẬP"
-            className="register_input"
-            value={formData.username}
-            onChange={handleChange}
-          />
         </div>
 
         <div className="flex flex-col items-start mb-16 mt-5 gap-8">

@@ -61,7 +61,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/blog" element={<Blog />}></Route>
         <Route path="/blog/:blogId" element={<BlogDetail />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>  
 
         {/* Profile layout with nested routes */}
         <Route path="/profile" element={<Profile />}>
@@ -76,7 +76,8 @@ function App() {
 
         {/* ADMIN ROUTES */}
         <Route path="/admin" element={<Admin />}>
-          <Route index element={<AdminDashboard />} />
+
+        <Route index element={<AdminDashboard />} />
           <Route path="equipment" element={<AdminEquipment />} />
           <Route path="user" element={<AdminUser />} />
           <Route path="blog" element={<AdminBlog />} />

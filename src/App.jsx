@@ -32,11 +32,22 @@ import Delivery from "./app/pages/profile/delivery";
 import Payment from "./app/pages/profile/payment";
 import Chat from "./app/pages/profile/chat";
 
+//ADMIN
+import Admin from "./app/admin/pages/adminLayout";
+import AdminDashboard from "./app/admin/pages/dashboard";
+import AdminEquipment from "./app/admin/pages/equipment";
+import AdminUser from "./app/admin/pages/user";
+import AdminCategory from "./app/admin/pages/category";
+import AdminBlog from "./app/admin/pages/blog";
+
 function App() {
+  const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <>
-      <FocalNav />
+      {/* Chỉ hiển thị Navbar/Footer nếu KHÔNG phải admin */}
+      {!isAdminRoute && <FocalNav />}
       <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/landing" element={<Landing />}></Route>
@@ -52,18 +63,28 @@ function App() {
         <Route path="/blog/:blogId" element={<BlogDetail />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
 
-        {/* OUTLET USING*/}
+        {/* Profile layout with nested routes */}
         <Route path="/profile" element={<Profile />}>
-          <Route path="info" index element={<Information />}></Route>
-          <Route path="favorite" element={<Favorite />}></Route>
-          <Route path="order" element={<Order />}></Route>
-          <Route path="bargan" element={<Bargan />}></Route>
-          <Route path="delivery" element={<Delivery />}></Route>
-          <Route path="payment" element={<Payment />}></Route>
-          <Route path="chat" element={<Chat />}></Route>
+          <Route path="info" index element={<Information />} />
+          <Route path="favorite" element={<Favorite />} />
+          <Route path="order" element={<Order />} />
+          <Route path="bargan" element={<Bargan />} />
+          <Route path="delivery" element={<Delivery />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="chat" element={<Chat />} />
+        </Route>
+
+        {/* ADMIN ROUTES */}
+        <Route path="/admin" element={<Admin />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="equipment" element={<AdminEquipment />} />
+          <Route path="user" element={<AdminUser />} />
+          <Route path="blog" element={<AdminBlog />} />
+          <Route path="category" element={<AdminCategory />} />
         </Route>
       </Routes>
-      <FooterFocal />
+
+      {!isAdminRoute && <FooterFocal />}
     </>
   );
 }

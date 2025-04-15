@@ -12,6 +12,8 @@ import FooterFocal from "./app/components/navbars/footer/footerFocal";
 // IMPORT PAGES
 import HomePage from "./app/pages/homepage/homePage";
 import Login from "./app/pages/auth/login";
+import ForgetPassword from "./app/pages/auth/forgetPassword";
+import ResetPassword from "./app/pages/auth/resetPassword";
 import Register from "./app/pages/auth/register";
 import Blog from "./app/pages/blog/blog";
 import BlogDetail from "./app/pages/blog/blogDetail";
@@ -47,17 +49,19 @@ function App() {
       <ScrollToTop />
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/landing" element={<Landing />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/product/:productId" element={<ProductDetail />} />
-        <Route path="/policy" element={<Policy />} />
-        <Route path="/privacy_policy" element={<PrivacyPolicy />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:blogId" element={<BlogDetail />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/landing" element={<Landing />}></Route>
+        <Route path="/product" element={<Product />}></Route>
+        <Route path="/product/:productId" element={<ProductDetail />}></Route>
+        <Route path="/policy" element={<Policy />}></Route>
+        <Route path="/privacy_policy" element={<PrivacyPolicy />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/forgetPassword" element={<ForgetPassword />}></Route>
+        <Route path="/resetPassword" element={<ResetPassword />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="/blog" element={<Blog />}></Route>
+        <Route path="/blog/:blogId" element={<BlogDetail />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>  
 
         {/* Profile layout with nested routes */}
         <Route path="/profile" element={<Profile />}>
@@ -72,6 +76,7 @@ function App() {
 
         {/* ADMIN ROUTES */}
         <Route path="/admin" element={<Admin />}>
+
         <Route index element={<AdminDashboard />} />
           <Route path="equipment" element={<AdminEquipment />} />
           <Route path="user" element={<AdminUser />} />

@@ -74,7 +74,7 @@ export default function Login() {
             />
             <label> Ghi nhớ đăng nhập</label>
           </div>
-          <Link className="underline font-semibold">Quên mật khẩu</Link>
+          <Link to={`/forgetPassword`} className="underline font-semibold">Quên mật khẩu</Link>
         </div>
 
         <button

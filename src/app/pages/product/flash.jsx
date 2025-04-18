@@ -48,31 +48,64 @@ export default function Flash() {
   }
 
   return (
-    <div className="px-20 pt-10 grid grid-cols-3 gap-8 items-stretch">
+    <div className="grid grid-cols-3 gap-8 px-20 pt-10">
       {equipmentList.map((equipment) => (
         <div
           key={equipment.equipmentId}
-          onClick={() => navigate(`/product/${equipment.equipmentId}`)}
-          className="border p-4 rounded shadow-md cursor-pointer hover:bg-gray-100 transition-all flex flex-col h-full"
+          className="border rounded shadow-md p-4 relative flex flex-col hover:bg-gray-100 transition-all"
         >
-          <h2 className="text-xl font-semibold mb-2 text-center line-clamp-2">
-            {equipment.brand} {equipment.model}
-          </h2>
-          <p className="text-center mt-auto">
-            <strong>Serial:</strong> {equipment.serialNumber}
-          </p>
-          <p className="text-center mt-auto">
-            <strong>Đánh giá:</strong> {equipment.dailyRate}
-          </p>
-          <p className="text-center mt-auto">
-            <strong>Ghi chú:</strong> {equipment.notes}
-          </p>
-          <p className="text-center mt-auto">
-            <strong>Tình trạng:</strong> {equipment.status === "AVAILABLE" ? "Có sẵn" : "Không có sẵn"}
-          </p>
-          <p className="text-center mt-auto">
-            <strong>Giá thuê:</strong> 500.000 VND
-          </p>
+          {/* Nút Thích */}
+          <div className="absolute top-2 right-2 text-sm text-black hover:underline cursor-pointer z-10 underline">
+            Thích
+          </div>
+
+          {/* Nội dung chính */}
+          <div
+            onClick={() => navigate(`/product/${equipment.equipmentId}`)}
+            className="cursor-pointer flex flex-col h-full"
+          >
+            {/* Phần đầu: ảnh + tiêu đề */}
+            <div>
+              <img
+                src={equipment.imageUrl || "/placeholder.jpg"}
+                alt={`${equipment.brand} ${equipment.model}`}
+                className="mx-auto h-40 object-contain"
+              />
+              <h2 className="text-xl font-semibold text-center text-wrap text-balance text-black mt-2">
+                {equipment.brand} {equipment.model}
+              </h2>
+            </div>
+
+            {/* Phần dưới: tự đẩy xuống cùng vị trí ở tất cả card */}
+            <div className="mt-auto grid grid-rows-6 gap-1 pt-4 text-center">
+              <p className="text-sm">
+                <strong>Serial:</strong> {equipment.serialNumber}
+              </p>
+              <p className="text-sm">
+                <strong>Đánh giá:</strong> {equipment.dailyRate}
+              </p>
+              <p className="text-sm line-clamp-1">
+                <strong>Ghi chú:</strong> {equipment.notes}
+              </p>
+              <p className="text-sm">
+                <strong>Tình trạng:</strong>{" "}
+                {equipment.status === "AVAILABLE" ? "Có sẵn" : "Không có sẵn"}
+              </p>
+              <p className="text-sm">
+                <strong>Giá thuê:</strong> 500.000 VND/ngày
+              </p> <br />
+
+              <button
+                className="text-sm text-black hover:underline text-left underline cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  console.log("🛒 Thêm vào giỏ hàng:", equipment.equipmentId);
+                }}
+              >
+                Thêm vào giỏ hàng
+              </button>
+            </div>
+          </div>
         </div>
       ))}
     </div>

@@ -28,11 +28,11 @@ export default function footerFocal() {
           <ul className="support_center">
             <p> Thông tin liên lạc</p>
             <li>Điện thoại : 0123456789</li>
-            <li>Email: focalHello@gmail.com</li>
+            <li>Email: focal@gmail.com</li>
             <li>Địa chỉ: Ho Chi Minh - Viet Nam</li>
             <li className="pt-2">
               <Link
-                to={`https://www.facebook.com/`}
+                to={`https://www.facebook.com/profile.php?id=61573170474337`}
                 target="_blank"
                 className="text-3xl mr-3 w-auto h-auto"
               >

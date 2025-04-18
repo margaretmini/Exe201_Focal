@@ -20,9 +20,9 @@ import BlogDetail from "./app/pages/blog/blogDetail";
 import Cart from "./app/pages/cart/cart";
 import Policy from "./app/pages/policy/policy";
 import PrivacyPolicy from "./app/pages/policy/privacyPolicy";
-import Product from "./app/pages/product/product";
+
 import Landing from "./app/pages/landing/landing";
-import ProductDetail from "./app/pages/product/ProductDetail";
+
 import Profile from "./app/pages/profile/userProfile";
 import Information from "./app/pages/profile/information";
 import Favorite from "./app/pages/profile/favorite";
@@ -31,6 +31,13 @@ import Bargan from "./app/pages/profile/bargan";
 import Delivery from "./app/pages/profile/delivery";
 import Payment from "./app/pages/profile/payment";
 import Chat from "./app/pages/profile/chat";
+import Product from "./app/pages/product/product";
+import ProductDetail from "./app/pages/product/ProductDetail";
+import ProductListAll from "./app/pages/product/productListAll";
+import Camera from "./app/pages/product/camera";
+import Flash from "./app/pages/product/flash";
+import Lens from "./app/pages/product/lens";
+import Freelancer from "./app/pages/product/freelancer";
 
 //ADMIN
 import Admin from "./app/admin/pages/adminLayout";
@@ -41,7 +48,9 @@ import AdminCategory from "./app/admin/pages/category";
 import AdminBlog from "./app/admin/pages/blog";
 
 function App() {
+
   const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
     <>
       {/* Chỉ hiển thị Navbar/Footer nếu KHÔNG phải admin */}
@@ -51,8 +60,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/landing" element={<Landing />}></Route>
-        <Route path="/product" element={<Product />}></Route>
-        <Route path="/product/:productId" element={<ProductDetail />}></Route>
         <Route path="/policy" element={<Policy />}></Route>
         <Route path="/privacy_policy" element={<PrivacyPolicy />}></Route>
         <Route path="/login" element={<Login />}></Route>
@@ -73,6 +80,17 @@ function App() {
           <Route path="payment" element={<Payment />} />
           <Route path="chat" element={<Chat />} />
         </Route>
+
+        <Route path="/product/:id" element={<ProductDetail />} />
+
+        {/* Product with outlet */}
+        <Route path="/product" element={<Product />}>
+        <Route index element={<ProductListAll />} />
+        <Route path="camera" element={<Camera />} />
+        <Route path="flash" element={<Flash />} />
+        <Route path="lens" element={<Lens />} />
+        <Route path="freelancer" element={<Freelancer />} />
+      </Route>
 
         {/* ADMIN ROUTES */}
         <Route path="/admin" element={<Admin />}>

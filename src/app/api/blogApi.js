@@ -1,6 +1,6 @@
 import axiosClient from "./axiosClient";
 
-const userApi = {
+const blogApi = {
   update: (id, data) => axiosClient.put(`/blog/update/${id}`, data),
   publish: (id) => axiosClient.put(`/blog/publish/${id}`),
   create: () => axiosClient.post(`/blog/create`, data),
@@ -8,4 +8,4 @@ const userApi = {
   allBlog: () => axiosClient.get(`/blog/all`),
 };
 
-export default userApi;
+export default blogApi;

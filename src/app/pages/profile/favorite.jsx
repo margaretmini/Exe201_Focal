@@ -1,10 +1,94 @@
-// File: CameraCardList.jsx
+import React, { useEffect, useState } from "react";
+import wishlistApi from "../../api/wishListApi";
 
-import React from "react";
+const Favorite = () => {
+  const [cardData, setCardData] = useState([]);
 
-const CameraCard = ({ title, code, status, amount, time, image }) => {
+  useEffect(() => {
+    fetchWishlist();
+
+    setCardData([
+      {
+        id: 1,
+        title: "Canon EOS R6 Mark II",
+        code: { label: "Chỉ máy", value: "CN00112233" },
+        status: "AVAILABLE",
+        amount: "980.000đ/ngày",
+        time: "Từ 12 đến 14 tháng Tư, 2025",
+        image: "https://cdn.vjshop.vn/camera/canon-eos-r6-mark-ii.jpg",
+      },
+      {
+        id: 2,
+        title: "Sony FX3",
+        code: { label: "Full bộ", value: "SNX39999" },
+        status: "IN_USE",
+        amount: "1.400.000đ/ngày",
+        time: "Từ 18 đến 20 tháng Tư, 2025",
+        image: "https://www.sony.com.vn/image/sony-fx3.png",
+      },
+    ]);
+  }, []);
+
+  const fetchWishlist = async () => {
+    try {
+      const res = await wishlistApi.getWishlist();
+      const data = res.data?.data?.content || [];
+
+      const transformed = data.map((item) => ({
+        id: item.id,
+        title: item.equipment.model,
+        code: {
+          label: item.equipment.notes || "Mã thiết bị",
+          value: item.equipment.serialNumber,
+        },
+        status: item.equipment.status,
+        amount: item.equipment.dailyRate?.toLocaleString() + "đ/ngày",
+        time: "Từ ... đến ...",
+        image: item.equipment.image || "https://via.placeholder.com/150",
+      }));
+
+      setCardData(transformed);
+    } catch (err) {
+      console.error("Lỗi lấy wishlist:", err);
+    }
+  };
+
+  const handleRemove = async (id) => {
+    try {
+      await wishlistApi.deleteWishItem(id);
+      setCardData((prev) => prev.filter((item) => item.id !== id));
+    } catch (err) {
+      console.error("Lỗi xoá item:", err);
+    }
+  };
+
   return (
-    <div className="border h-60 w-[500px] p-4 flex flex-col justify-between text-sm">
+    <div className="w-[1600px] pl-8 flex flex-row gap-6">
+      {cardData.length === 0 ? (
+        <div className="text-gray-500 text-sm italic">
+          Hiện tại chưa có món đồ yêu thích.
+        </div>
+      ) : (
+        cardData.map((item) => (
+          <CameraCard key={item.id} {...item} onRemove={handleRemove} />
+        ))
+      )}
+    </div>
+  );
+};
+
+const CameraCard = ({
+  id,
+  title,
+  code,
+  status,
+  amount,
+  time,
+  image,
+  onRemove,
+}) => {
+  return (
+    <div className="border h-60 w-[400px] p-4 flex flex-col justify-between text-sm">
       {/* Header */}
       <div className="flex justify-between items-start">
         <div className="font-semibold">{title}</div>
@@ -27,42 +111,14 @@ const CameraCard = ({ title, code, status, amount, time, image }) => {
       </div>
 
       {/* Footer */}
-      <div className="text-xs text-right mt-2 underline cursor-pointer">
-        Rút tiền
+      <div
+        className="text-xs text-right mt-2 underline cursor-pointer text-red-500"
+        onClick={() => onRemove(id)}
+      >
+        Bỏ thích
       </div>
     </div>
   );
 };
 
-const favorite = () => {
-  const cardData = [
-    {
-      title: "SONY A6700",
-      code: { label: "Chỉ máy", value: "A04000192" },
-      status: "Đã hoàn thành",
-      amount: "1.200.000đ",
-      time: "Từ 10 đến 12 tháng Mười, 24",
-      image:
-        "https://imagedelivery.net/ZeGtsGSjuQe1P3UP_zk3fQ/a5b067a3-3ff2-4219-d071-9409a6d49f00/storedata",
-    },
-    {
-      title: "SONY A6700",
-      code: { label: "", value: "A04000192" },
-      status: "Successfully",
-      amount: "1.200.000đ",
-      time: "Từ 10 đến 12 tháng Mười, 24",
-      image:
-        "https://imagedelivery.net/ZeGtsGSjuQe1P3UP_zk3fQ/a5b067a3-3ff2-4219-d071-9409a6d49f00/storedata",
-    },
-  ];
-
-  return (
-    <div className="w-full pl-20 flex flex-row justify-start">
-      {cardData.map((item, index) => (
-        <CameraCard key={index} {...item} />
-      ))}
-    </div>
-  );
-};
-
-export default favorite;
+export default Favorite;

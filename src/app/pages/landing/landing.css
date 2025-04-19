@@ -1,3 +1,7 @@
+.logo{
+  font-family: Helvetica;
+  font-size: 100px;
+}
 .slider-container {
   position: relative;
   overflow: hidden;

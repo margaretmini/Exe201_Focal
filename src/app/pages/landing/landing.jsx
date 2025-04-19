@@ -24,17 +24,17 @@ export default function Landing() {
   const [current2, setCurrent2] = useState(0);
   const [current3, setCurrent3] = useState(0);
 
-  const prev = (set, total) => set((prev) => (prev === 0 ? total - 1 : prev - 1));
-  const next = (set, total) => set((prev) => (prev === total - 1 ? 0 : prev + 1));
+  const prev = (set, total) =>
+    set((prev) => (prev === 0 ? total - 1 : prev - 1));
+  const next = (set, total) =>
+    set((prev) => (prev === total - 1 ? 0 : prev + 1));
 
   return (
     <div className="bg-white w-full">
       <div className="max-w-[1440px] mx-auto px-4">
-        <div className="py-6 text-3xl font-bold">focal</div>
-
-        {/* Section 1 */}
+        {/* Phần 1 */}
         <section className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]">
-          {/* Image slider */}
+          {/* Trình chiếu ảnh */}
           <div className="flex-1 slider-container">
             <div
               className="slider-track"
@@ -42,6 +42,18 @@ export default function Landing() {
             >
               {sliderImages.map((src, index) => (
                 <img key={index} src={src} alt="" className="slider-image" />
+              ))}
+            </div>
+            {/* Dots */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+              {sliderImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`w-3 h-3 rounded-full ${
+                    current === i ? "bg-black" : "bg-gray-400"
+                  }`}
+                />
               ))}
             </div>
             <button
@@ -58,34 +70,59 @@ export default function Landing() {
             </button>
           </div>
 
-          {/* Text */}
+          {/* Nội dung chữ */}
           <div className="flex-1 space-y-6">
-            <h2 className="text-2xl md:text-3xl font-bold leading-snug text-black">
-              MASTERING THE ART OF BALANCE: ACHIEVING PERFECT HARMONY IN PROFESSIONAL PHOTOGRAPHY
+            <h2 className="text-2xl md:text-3xl font-bold leading-snug text-black text-center">
+              LÀM CHỦ NGHỆ THUẬT CÂN BẰNG: ĐẠT ĐẾN SỰ HÀI HÒA HOÀN HẢO TRONG
+              NHIẾP ẢNH CHUYÊN NGHIỆP
             </h2>
-            <p className="text-base text-gray-800 leading-relaxed">
-              In photography, balance is a fundamental principle that can make or break an image...
+            <p
+              className="text-base text-gray-800 leading-relaxed text-justify"
+              style={{ textAlign: "justify" }}
+            >
+              Trong nhiếp ảnh, sự cân bằng là nguyên lý cốt lõi có thể tạo nên
+              hoặc phá vỡ một bức ảnh. Sự phân bố ánh sáng, bố cục, màu sắc và
+              yếu tố thị giác cần hài hòa để người xem cảm nhận được chiều sâu
+              và cảm xúc thật sự. Việc làm chủ sự cân bằng giúp nhiếp ảnh gia kể
+              chuyện một cách tinh tế, đưa người xem vào thế giới của khung hình
+              một cách tự nhiên và trọn vẹn.
             </p>
             <div className="text-right">
-              <Link to="#" className="text-lg font-bold underline hover:text-gray-700 transition">
+              <Link
+                to="#"
+                className="text-lg font-bold underline hover:text-gray-700 transition"
+              >
                 ĐỌC THÊM
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Section 2 */}
+        {/* Phần 2 */}
         <section className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]">
           <div className="flex-1 space-y-4 h-full overflow-y-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-black">
-              PHOTOGRAPHY AS ART: CAPTURING EMOTION BEYOND THE LENS
+            <h2 className="text-2xl md:text-3xl font-bold text-black text-center">
+              NHIẾP ẢNH NHƯ MỘT LOẠI HÌNH NGHỆ THUẬT: NẮM BẮT CẢM XÚC VƯỢT RA
+              NGOÀI ỐNG KÍNH
             </h2>
-            <p className="text-base text-gray-800">
-              Photography is more than a technical skill — it’s a powerful form of artistic expression...
+            <p
+              className="text-base text-gray-800 text-justify"
+              style={{ textAlign: "justify" }}
+            >
+              Nhiếp ảnh không chỉ là một kỹ năng kỹ thuật — nó còn là một hình
+              thức thể hiện nghệ thuật đầy mạnh mẽ. Một bức ảnh đẹp không chỉ
+              ghi lại khoảnh khắc, mà còn truyền tải cảm xúc, câu chuyện và cái
+              nhìn cá nhân của người chụp. Khi đặt trái tim vào từng khung hình,
+              mỗi bức ảnh trở thành một tác phẩm nghệ thuật mang đậm dấu ấn
+              riêng biệt, kết nối cảm xúc giữa người sáng tạo và người thưởng
+              thức.
             </p>
             <div className="text-right">
-              <Link to="#" className="text-lg font-bold underline hover:text-gray-700 transition">
-                KHÁM PHÁ THÊM
+              <Link
+                to="#"
+                className="text-lg font-bold underline hover:text-gray-700 transition"
+              >
+                ĐỌC THÊM
               </Link>
             </div>
           </div>
@@ -96,6 +133,17 @@ export default function Landing() {
             >
               {sliderImagesSection2.map((src, index) => (
                 <img key={index} src={src} alt="" className="slider-image" />
+              ))}
+            </div>
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+              {sliderImagesSection2.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent2(i)}
+                  className={`w-3 h-3 rounded-full ${
+                    current2 === i ? "bg-black" : "bg-gray-400"
+                  }`}
+                />
               ))}
             </div>
             <button
@@ -113,7 +161,7 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Section 3 */}
+        {/* Phần 3 */}
         <section className="py-16 h-[740px]">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold">SẢN PHẨM MỚI</h2>
@@ -122,13 +170,30 @@ export default function Landing() {
             </Link>
           </div>
 
-          <div className="relative h-[600px] mx-auto slider-container rounded-2xl">
+          <div className="relative h-[500px] mx-auto slider-container rounded-2xl">
             <div
               className="slider-track"
               style={{ transform: `translateX(-${current3 * 100}%)` }}
             >
               {sliderImagesSection3.map((src, index) => (
-                <img key={index} src={src} alt="" className="slider-image rounded-2xl" />
+                <img
+                  key={index}
+                  src={src}
+                  alt=""
+                  className="slider-image rounded-2xl"
+                />
+              ))}
+            </div>
+            {/* Dots */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+              {sliderImagesSection3.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent3(i)}
+                  className={`w-3 h-3 rounded-full ${
+                    current3 === i ? "bg-black" : "bg-gray-400"
+                  }`}
+                />
               ))}
             </div>
             <button
@@ -146,9 +211,12 @@ export default function Landing() {
           </div>
 
           <div className="text-center mt-10">
-            <h3 className="text-[48px] font-extrabold tracking-tight" style={{ fontFamily: "monospace" }}>
+            <h2
+              className="text-[48px] font-extrabold tracking-tight"
+              style={{ fontFamily: "monospace" }}
+            >
               SONY A6700
-            </h3>
+            </h2>
           </div>
         </section>
       </div>

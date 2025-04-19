@@ -170,10 +170,10 @@ export default function RentalList() {
                     className="text-green-600 hover:text-green-800 text-lg cursor-pointer"
                     onClick={() => confirmApprove(rental.rentalId)}
                   />
-                  <CloseOutlined
+                  {/* <CloseOutlined
                     className="text-red-600 hover:text-red-800 text-lg cursor-pointer"
                     onClick={() => confirmCancel(rental.rentalId)}
-                  />
+                  /> */}
                 </>
               ) : (
                 <div className="text-gray-400 text-xs italic">Done</div>

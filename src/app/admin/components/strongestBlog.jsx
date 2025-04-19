@@ -20,7 +20,7 @@ const strongestBlogs = [
 
 const strongestBlog = () => {
     return (
-        <div className="bg-white p-6 rounded-xl shadow-lg ">
+        <div className="bg-white p-6 rounded-xl shadow-lg mt-30">
           <h2 className="text-2xl font-semibold mb-6">Strongest Blogs</h2>
           <div className="space-y-6">
             {strongestBlogs.map((blog) => (

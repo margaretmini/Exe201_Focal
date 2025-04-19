@@ -8,29 +8,34 @@ export default function Camera() {
   const [equipmentList, setEquipmentList] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const fallbackImages = [
+    "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1651922985926-c8fb8c1fe8c4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1574494461515-c8005821fbe5?q=80&w=2070&auto=format&fit=crop",
+  ];
+
+  const getRandomFallbackImage = () => {
+    const index = Math.floor(Math.random() * fallbackImages.length);
+    return fallbackImages[index];
+  };
+
   useEffect(() => {
     const fetchEquipments = async () => {
       try {
-        // truyền đủ params để lấy page 0, size 100
         const response = await equipmentApi.getAllEquipments(
           0,
           100,
           "equipmentId"
         );
-        console.log("📦 Full API response:", response);
-
-        // unwrap thêm 1 cấp data
         const equipments = response?.data?.data?.content || [];
-        console.log("✅ Thiết bị lấy được:", equipments);
-
-        const filtered = equipments.filter(
-          (item) => item?.category?.categoryId === 1 // Máy ảnh
-        );
-        console.log("📸 Thiết bị thuộc danh mục Máy ảnh:", filtered);
-
+        const filtered = equipments
+          .filter((item) => item?.category?.categoryId === 1) // Máy ảnh
+          .map((item) => ({
+            ...item,
+            imageUrl: item.imageUrl?.trim() || getRandomFallbackImage(),
+          }));
         setEquipmentList(filtered);
       } catch (error) {
-        console.error("❌ Lỗi khi load thiết bị:", error);
         setEquipmentList([]);
       } finally {
         setLoading(false);
@@ -70,9 +75,13 @@ export default function Camera() {
             {/* Phần đầu: ảnh + tiêu đề */}
             <div>
               <img
-                src={equipment.imageUrl || "/placeholder.jpg"}
+                src={equipment.imageUrl}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = getRandomFallbackImage();
+                }}
                 alt={`${equipment.brand} ${equipment.model}`}
-                className="mx-auto h-40 object-contain"
+                className="mx-auto h-60 object-contain rounded-lg"
               />
               <h2 className="text-xl font-semibold text-center text-wrap text-balance text-black mt-2">
                 {equipment.brand} {equipment.model}
@@ -96,8 +105,8 @@ export default function Camera() {
               </p>
               <p className="text-sm">
                 <strong>Giá thuê:</strong> 500.000 VND/ngày
-              </p> <br />
-
+              </p>{" "}
+              <br />
               <button
                 className="text-sm text-black hover:underline text-left underline cursor-pointer"
                 onClick={(e) => {

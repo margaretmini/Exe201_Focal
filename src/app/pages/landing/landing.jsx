@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./landing.css";
 
 export default function Landing() {
   const sliderImages = [
-    "https://images.unsplash.com/photo-1686579809662-829e8374d0a8?w=600&auto=format&fit=crop&q=60",
-    "https://plus.unsplash.com/premium_photo-1675448891094-0f3acc556fdb?w=600&auto=format&fit=crop&q=60",
-    "https://images.unsplash.com/photo-1539634262233-7c0b48ab9503?w=600&auto=format&fit=crop&q=60",
-    "https://images.unsplash.com/photo-1614983652406-41044db11dc6?w=600&auto=format&fit=crop&q=60",
+    "https://images.unsplash.com/photo-1743021192899-5e78625bf0c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1741851373499-e2c10ed2eeb3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1742943892627-f7e4ddf91224?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1743078344181-6eeea5796e8d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
   const sliderImagesSection2 = [
     "https://images.unsplash.com/photo-1523257795348-d6e1ae30d547?q=80&w=2070&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1519183071298-a2962ae0b2cf?q=80&w=2070&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1488376739361-e6c33f7f42b4?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1515446134809-993c501ca304?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
   const sliderImagesSection3 = [
-    "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f",
-    "https://images.unsplash.com/photo-1602524818670-28c6d15fca40",
-    "https://images.unsplash.com/photo-1581291518830-4c4a6b2ad0ff",
+    "https://images.unsplash.com/photo-1495707902641-75cac588d2e9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1460134846237-51c777df6111?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://plus.unsplash.com/premium_photo-1663134149019-284682ece04c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1536632087471-3cf3f2986328?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   ];
 
   const [current, setCurrent] = useState(0);
@@ -29,13 +30,46 @@ export default function Landing() {
   const next = (set, total) =>
     set((prev) => (prev === total - 1 ? 0 : prev + 1));
 
+  // Scroll logic
+  const sectionRefs = [useRef(null), useRef(null), useRef(null)];
+  const [currentSection, setCurrentSection] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleWheel = (e) => {
+      if (scrolling) return;
+
+      setScrolling(true);
+      setTimeout(() => setScrolling(false), 1000); // delay scroll
+
+      if (e.deltaY > 0 && currentSection < sectionRefs.length - 1) {
+        setCurrentSection((prev) => {
+          const next = prev + 1;
+          sectionRefs[next].current.scrollIntoView({ behavior: "smooth" });
+          return next;
+        });
+      } else if (e.deltaY < 0 && currentSection > 0) {
+        setCurrentSection((prev) => {
+          const prevIndex = prev - 1;
+          sectionRefs[prevIndex].current.scrollIntoView({ behavior: "smooth" });
+          return prevIndex;
+        });
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel);
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [currentSection, scrolling]);
+
   return (
     <div className="bg-white w-full">
       <div className="max-w-[1440px] mx-auto px-4">
-        {/* Phần 1 */}
-        <section className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]">
-          {/* Trình chiếu ảnh */}
-          <div className="flex-1 slider-container">
+        {/* Section 1 */}
+        <section
+          ref={sectionRefs[0]}
+          className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]"
+        >
+          <div className="flex-1 slider-container relative">
             <div
               className="slider-track"
               style={{ transform: `translateX(-${current * 100}%)` }}
@@ -44,7 +78,6 @@ export default function Landing() {
                 <img key={index} src={src} alt="" className="slider-image" />
               ))}
             </div>
-            {/* Dots */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
               {sliderImages.map((_, i) => (
                 <button
@@ -70,17 +103,13 @@ export default function Landing() {
             </button>
           </div>
 
-          {/* Nội dung chữ */}
           <div className="flex-1 space-y-6">
             <h2 className="text-2xl md:text-3xl font-bold leading-snug text-black text-center">
               LÀM CHỦ NGHỆ THUẬT CÂN BẰNG: ĐẠT ĐẾN SỰ HÀI HÒA HOÀN HẢO TRONG
               NHIẾP ẢNH CHUYÊN NGHIỆP
             </h2>
-            <p
-              className="text-base text-gray-800 leading-relaxed text-justify"
-              style={{ textAlign: "justify" }}
-            >
-              Trong nhiếp ảnh, sự cân bằng là nguyên lý cốt lõi có thể tạo nên
+            <p className="text-base text-gray-800 leading-relaxed text-justify">
+            Trong nhiếp ảnh, sự cân bằng là nguyên lý cốt lõi có thể tạo nên
               hoặc phá vỡ một bức ảnh. Sự phân bố ánh sáng, bố cục, màu sắc và
               yếu tố thị giác cần hài hòa để người xem cảm nhận được chiều sâu
               và cảm xúc thật sự. Việc làm chủ sự cân bằng giúp nhiếp ảnh gia kể
@@ -89,7 +118,7 @@ export default function Landing() {
             </p>
             <div className="text-right">
               <Link
-                to="#"
+                to="/blog"
                 className="text-lg font-bold underline hover:text-gray-700 transition"
               >
                 ĐỌC THÊM
@@ -98,17 +127,16 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Phần 2 */}
-        <section className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]">
+        {/* Section 2 */}
+        <section
+          ref={sectionRefs[1]}
+          className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]"
+        >
           <div className="flex-1 space-y-4 h-full overflow-y-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-black text-center">
-              NHIẾP ẢNH NHƯ MỘT LOẠI HÌNH NGHỆ THUẬT: NẮM BẮT CẢM XÚC VƯỢT RA
-              NGOÀI ỐNG KÍNH
+              NHIẾP ẢNH NHƯ MỘT LOẠI HÌNH NGHỆ THUẬT
             </h2>
-            <p
-              className="text-base text-gray-800 text-justify"
-              style={{ textAlign: "justify" }}
-            >
+            <p className="text-base text-gray-800 text-justify">
               Nhiếp ảnh không chỉ là một kỹ năng kỹ thuật — nó còn là một hình
               thức thể hiện nghệ thuật đầy mạnh mẽ. Một bức ảnh đẹp không chỉ
               ghi lại khoảnh khắc, mà còn truyền tải cảm xúc, câu chuyện và cái
@@ -119,14 +147,14 @@ export default function Landing() {
             </p>
             <div className="text-right">
               <Link
-                to="#"
+                to="/blog"
                 className="text-lg font-bold underline hover:text-gray-700 transition"
               >
                 ĐỌC THÊM
               </Link>
             </div>
           </div>
-          <div className="flex-1 slider-container">
+          <div className="flex-1 slider-container relative">
             <div
               className="slider-track"
               style={{ transform: `translateX(-${current2 * 100}%)` }}
@@ -161,15 +189,14 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* Phần 3 */}
-        <section className="py-16 h-[740px]">
+        {/* Section 3 */}
+        <section ref={sectionRefs[2]} className="py-16 h-[680px]">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold">SẢN PHẨM MỚI</h2>
-            <Link to="#" className="underline font-bold text-gray-800">
+            <Link to="/product" className="underline font-bold text-gray-800">
               KHÁM PHÁ NGAY
             </Link>
           </div>
-
           <div className="relative h-[500px] mx-auto slider-container rounded-2xl">
             <div
               className="slider-track"
@@ -184,7 +211,6 @@ export default function Landing() {
                 />
               ))}
             </div>
-            {/* Dots */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
               {sliderImagesSection3.map((_, i) => (
                 <button
@@ -208,15 +234,6 @@ export default function Landing() {
             >
               &#8250;
             </button>
-          </div>
-
-          <div className="text-center mt-10">
-            <h2
-              className="text-[48px] font-extrabold tracking-tight"
-              style={{ fontFamily: "monospace" }}
-            >
-              SONY A6700
-            </h2>
           </div>
         </section>
       </div>

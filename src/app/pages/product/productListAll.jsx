@@ -22,14 +22,8 @@ export default function ProductListAll() {
   useEffect(() => {
     const fetchEquipments = async () => {
       try {
-        const response = await equipmentApi.getAllEquipments(
-          0,
-          100,
-          "equipmentId"
-        );
-        console.log("📦 Tất cả sản phẩm:", response);
-
-        const equipments = response?.data?.data?.content || [];
+        const response = await equipmentApi.getAllEquipments();
+        const equipments = response?.data?.data || [];
         const enrichedEquipments = equipments.map((item) => ({
           ...item,
           imageUrl: item.imageUrl?.trim() || getRandomFallbackImage(),

@@ -1,14 +1,12 @@
 import axiosClient from "./axiosClient";
 
 const rentalApi = {
-  // Tạo yêu cầu thuê mới
+  //USER
   createRental: (data) => axiosClient.post("/rental", data),
-
-  // Hủy yêu cầu thuê
+  //ADMIN
   cancelRental: (id) => axiosClient.put(`/rental/${id}/cancel`),
-
-  // Duyệt yêu cầu thuê
-  approveRental: (id) => axiosClient.put(`/rental/${id}/approve`)
+  approveRental: (id) => axiosClient.put(`/rental/${id}/approve`),
+  getAllRental: () => axiosClient.get("/rental")
 };
 
 export default rentalApi;

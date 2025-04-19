@@ -32,7 +32,7 @@ import Delivery from "./app/pages/profile/delivery";
 import Payment from "./app/pages/profile/payment";
 import Chat from "./app/pages/profile/chat";
 import Product from "./app/pages/product/product";
-import ProductDetail from "./app/pages/product/ProductDetail";
+import ProductDetail from "./app/pages/product/productDetail";
 import ProductListAll from "./app/pages/product/productListAll";
 import Camera from "./app/pages/product/camera";
 import Flash from "./app/pages/product/flash";
@@ -46,6 +46,7 @@ import AdminEquipment from "./app/admin/pages/equipment";
 import AdminUser from "./app/admin/pages/user";
 import AdminCategory from "./app/admin/pages/category";
 import AdminBlog from "./app/admin/pages/blog";
+import AdminRental from "./app/admin/pages/rental";
 
 function App() {
 
@@ -100,6 +101,7 @@ function App() {
           <Route path="user" element={<AdminUser />} />
           <Route path="blog" element={<AdminBlog />} />
           <Route path="category" element={<AdminCategory />} />
+          <Route path="rental" element={<AdminRental />} />
         </Route>
       </Routes>
 

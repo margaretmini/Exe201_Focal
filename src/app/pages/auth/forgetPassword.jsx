@@ -47,12 +47,12 @@ export default function ForgetPassword() {
           placeholder="example@gmail.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mb-6"
+          className="mb-6 py-2 px-2"
         />
 
         <button
-          onClick={testNextStep}
-          className="bg-black text-white w-full py-3 rounded hover:bg-gray-800"
+          onClick={handleForgetPassword}
+          className="bg-black text-white w-full py-2 rounded hover:bg-gray-800 mt-5"
         >
           TIẾP TỤC
         </button>

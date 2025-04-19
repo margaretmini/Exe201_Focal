@@ -18,9 +18,14 @@ export default function policy() {
         </span>
         <span className="text-black text-2xl font-normal">
           <br />
-          Nhằm tối ưu hóa sự sẵn có và đảm bảo quy trình cho thuê bền vững, thiết bị được liệt kê trên Focal được cung cấp dựa trên yêu cầu người dùng. Khi yêu cầu thuê được xác nhận bởi chủ sở hữu, họ sẽ chuẩn bị thiết bị để giao hoặc cho nhận tại chỗ. Việc chuẩn bị thường mất 1–3 ngày làm việc, tùy vào lịch trình của chủ sở hữu.
+          Nhằm tối ưu hóa sự sẵn có và đảm bảo quy trình cho thuê bền vững,
+          thiết bị được liệt kê trên Focal được cung cấp dựa trên yêu cầu người
+          dùng. Khi yêu cầu thuê được xác nhận bởi chủ sở hữu, họ sẽ chuẩn bị
+          thiết bị để giao hoặc cho nhận tại chỗ. Việc chuẩn bị thường mất 1–3
+          ngày làm việc, tùy vào lịch trình của chủ sở hữu.
           <br />
-          Xin lưu ý rằng có thể có một số chậm trễ do các yếu tố bất khả kháng, bao gồm ngày lễ hoặc sự kiện ảnh hưởng đến việc giao hàng.
+          Xin lưu ý rằng có thể có một số chậm trễ do các yếu tố bất khả kháng,
+          bao gồm ngày lễ hoặc sự kiện ảnh hưởng đến việc giao hàng.
           <br />
           <br />
         </span>
@@ -30,7 +35,9 @@ export default function policy() {
         </span>
         <span className="text-black text-2xl font-normal">
           <br />
-          Thiết bị được đánh dấu "Sẵn sàng cho thuê" có thể đặt ngay lập tức. Khi được phê duyệt, thiết bị sẽ được chuẩn bị để giao hoặc nhận trong vòng 1–2 ngày làm việc.
+          Thiết bị được đánh dấu "Sẵn sàng cho thuê" có thể đặt ngay lập tức.
+          Khi được phê duyệt, thiết bị sẽ được chuẩn bị để giao hoặc nhận trong
+          vòng 1–2 ngày làm việc.
           <br />
           <br />
         </span>
@@ -40,13 +47,15 @@ export default function policy() {
         </span>
         <span className="text-black text-2xl font-normal">
           <br />
-          Focal hỗ trợ thuê số lượng lớn cho sự kiện hoặc dự án. Vui lòng liên hệ qua email support@focalrentals.com để được hỗ trợ riêng.
+          Focal hỗ trợ thuê số lượng lớn cho sự kiện hoặc dự án. Vui lòng liên
+          hệ qua email support@focalrentals.com để được hỗ trợ riêng.
           <br />
           Lưu ý:
           <br />
         </span>
         <span className="text-black text-2xl font-normal">
-          Thiết bị được cung cấp bởi các cá nhân, có thể có sự khác biệt nhỏ giữa mô tả và tình trạng thực tế.
+          Thiết bị được cung cấp bởi các cá nhân, có thể có sự khác biệt nhỏ
+          giữa mô tả và tình trạng thực tế.
           <br />
           Người thuê nên kiểm tra kỹ thiết bị khi nhận để đảm bảo sự hài lòng.
           <br />
@@ -69,7 +78,9 @@ export default function policy() {
         </span>
         <span className="text-black text-2xl font-normal">
           <br />
-          Chúng tôi cung cấp tùy chọn giao hàng thông qua các đơn vị vận chuyển địa phương. Phí vận chuyển và thời gian dự kiến sẽ thay đổi tùy vị trí và chủ thiết bị.
+          Chúng tôi cung cấp tùy chọn giao hàng thông qua các đơn vị vận chuyển
+          địa phương. Phí vận chuyển và thời gian dự kiến sẽ thay đổi tùy vị trí
+          và chủ thiết bị.
           <br />
           <br />
         </span>
@@ -83,7 +94,8 @@ export default function policy() {
           <br />
           Theo dõi đơn hàng:
           <br />
-          Sau khi thiết bị được giao, mã theo dõi sẽ được gửi qua email để bạn tiện theo dõi.
+          Sau khi thiết bị được giao, mã theo dõi sẽ được gửi qua email để bạn
+          tiện theo dõi.
           <br />
           <br />
         </span>
@@ -92,9 +104,12 @@ export default function policy() {
           <br />
         </span>
         <span className="text-black text-2xl font-normal">
-          Thời gian giao hàng có thể thay đổi do vị trí và hiệu quả của đơn vị vận chuyển.
+          Thời gian giao hàng có thể thay đổi do vị trí và hiệu quả của đơn vị
+          vận chuyển.
           <br />
-          Focal không chịu trách nhiệm về thuế, hải quan, hoặc mất/mất mát trong quá trình vận chuyển. Vui lòng liên hệ trực tiếp với chủ thiết bị nếu có vấn đề.
+          Focal không chịu trách nhiệm về thuế, hải quan, hoặc mất/mất mát trong
+          quá trình vận chuyển. Vui lòng liên hệ trực tiếp với chủ thiết bị nếu
+          có vấn đề.
           <br />
         </span>
         <span className="text-black text-2xl font-normal">
@@ -107,7 +122,8 @@ export default function policy() {
         </span>
         <span className="text-black text-2xl font-normal">
           <br />
-          Chúng tôi chấp nhận các loại thẻ thanh toán chính như Visa, Mastercard, American Express và các loại khác.
+          Chúng tôi chấp nhận các loại thẻ thanh toán chính như Visa,
+          Mastercard, American Express và các loại khác.
           <br />
           <br />
           <br />
@@ -126,7 +142,9 @@ export default function policy() {
         </span>
         <span className="text-black text-2xl font-normal">
           <br />
-          Mọi giao dịch thuê được xem là hoàn tất khi hai bên đã thống nhất. Nếu có vấn đề phát sinh, vui lòng liên hệ chủ sở hữu hoặc gửi email đến support@focal.com để được hỗ trợ.
+          Mọi giao dịch thuê được xem là hoàn tất khi hai bên đã thống nhất. Nếu
+          có vấn đề phát sinh, vui lòng liên hệ chủ sở hữu hoặc gửi email đến
+          support@focal.com để được hỗ trợ.
           <br />
           <br />
         </span>
@@ -136,7 +154,8 @@ export default function policy() {
         </span>
         <span className="text-black text-2xl font-normal">
           <br />
-          Nếu bạn cần hủy thuê trong vòng 24 giờ kể từ khi đặt, hãy liên hệ ngay với chúng tôi. Phí hoàn tiền sẽ tùy vào phương thức thanh toán:
+          Nếu bạn cần hủy thuê trong vòng 24 giờ kể từ khi đặt, hãy liên hệ ngay
+          với chúng tôi. Phí hoàn tiền sẽ tùy vào phương thức thanh toán:
           <br />
         </span>
         <span className="text-black text-2xl font-normal">
@@ -182,7 +201,8 @@ export default function policy() {
         <span className="text-black text-2xl font-normal">
           Sạc pin đúng cách và tránh sạc quá lâu.
           <br />
-          Bảo quản thẻ nhớ cẩn thận và trả lại khi đã lưu dữ liệu (trừ khi có thỏa thuận khác).
+          Bảo quản thẻ nhớ cẩn thận và trả lại khi đã lưu dữ liệu (trừ khi có
+          thỏa thuận khác).
           <br />
         </span>
         <span className="text-black text-2xl font-normal">

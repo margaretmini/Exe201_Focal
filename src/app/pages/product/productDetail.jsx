@@ -137,7 +137,7 @@ export default function ProductDetail() {
       <p className="text-lg mb-1">Serial: {equipment.serialNumber}</p>
       <p className="text-lg mb-1">Tình trạng: {equipment.status}</p>
       <p className="text-lg mb-1">Ghi chú: {equipment.notes}</p>
-      <p className="text-lg mb-4">Giá thuê/ngày: {equipment.dailyRate} USD</p>
+      <p className="text-lg mb-4">Giá thuê/ngày: {equipment.dailyRate} VND</p>
 
       {/* Bộ chọn ngày */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6">

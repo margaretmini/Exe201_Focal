@@ -8,7 +8,8 @@ export default function Product() {
     <div>
       <div className="flex px-20 justify-between">
         <span className="text-black text-4xl font-normal">
-          <p>TẤT CẢ SẢN PHẨM</p>
+          <Link to={"/product"}><p className="hover:underline">TẤT CẢ SẢN PHẨM</p></Link>
+          
         </span>
         <span className="text-black text-4xl font-normal">
           <p>TÌM KIẾM</p>

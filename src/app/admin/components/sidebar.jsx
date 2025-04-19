@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Home, Camera, Users, FileText, Layers, LogOut } from "lucide-react";
+import { Home, Camera, Users, FileText, CreditCard, Layers, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
@@ -49,6 +49,7 @@ const Sidebar = () => {
         <MenuItem icon={<Layers size={18} />} text="Category" to="/admin/category" />
         <MenuItem icon={<FileText size={18} />} text="Blog" to="/admin/blog" />
         <MenuItem icon={<Users size={18} />} text="User" to="/admin/user" />
+        <MenuItem icon={<CreditCard size={18} />} text="Rental" to="/admin/rental" />
       </nav>
 
       <div

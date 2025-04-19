@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import equipmentApi from "../../api/equipmentApi";
-import rentalApi from "../../api/rentalApi"; 
+import rentalApi from "../../api/rentalApi";
+import { Modal, message } from "antd"; // 👈 Thêm Modal + message
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -19,7 +20,7 @@ export default function ProductDetail() {
 
   const fallbackImages = [
     "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=2070&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1651922985926-c8fb8c1fe8c4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1651922985926-c8fb8c1fe8c4?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1574494461515-c8005821fbe5?q=80&w=2070&auto=format&fit=crop",
   ];
 
@@ -42,14 +43,14 @@ export default function ProductDetail() {
 
   const handleRent = async () => {
     if (!startDate || !endDate) {
-      alert("Vui lòng chọn đầy đủ ngày bắt đầu và kết thúc.");
+      message.warning("Vui lòng chọn đầy đủ ngày bắt đầu và kết thúc.");
       return;
     }
 
     const daysDiff = (endDate - startDate) / (1000 * 60 * 60 * 24);
 
     if (daysDiff < 1) {
-      alert("Ngày kết thúc phải cách ngày bắt đầu ít nhất 1 ngày.");
+      message.warning("Ngày kết thúc phải cách ngày bắt đầu ít nhất 1 ngày.");
       return;
     }
 
@@ -58,22 +59,37 @@ export default function ProductDetail() {
 
       const payload = {
         equipmentId: equipment.equipmentId,
-        startDate: startDate.toISOString().slice(0, 10), // format yyyy-MM-dd
+        startDate: startDate.toISOString().slice(0, 10),
         endDate: endDate.toISOString().slice(0, 10),
       };
 
-      const response = await rentalApi.createRental(payload); // 👈 Gọi API POST
+      const response = await rentalApi.createRental(payload);
       if (response?.data?.status === "success") {
-        alert("Thuê thành công! Đang chờ xác nhận...");
+        message.success("Thuê thành công! Đang chờ xác nhận...");
       } else {
-        alert("Thuê thất bại. Vui lòng thử lại.");
+        message.error("Thuê thất bại. Vui lòng thử lại.");
       }
     } catch (error) {
       console.error("Lỗi khi thuê thiết bị:", error);
-      alert("Có lỗi xảy ra khi thuê thiết bị.");
+      message.error("Có lỗi xảy ra khi thuê thiết bị.");
     } finally {
       setLoading(false);
     }
+  };
+
+  const confirmRent = () => {
+    if (!startDate || !endDate) {
+      message.warning("Vui lòng chọn ngày trước khi thuê.");
+      return;
+    }
+
+    Modal.confirm({
+      title: "Xác nhận thuê thiết bị",
+      content: "Bạn có chắc chắn muốn thuê thiết bị này không?",
+      okText: "Xác nhận",
+      cancelText: "Hủy",
+      onOk: () => handleRent(),
+    });
   };
 
   const handleAddToCart = () => {
@@ -91,7 +107,7 @@ export default function ProductDetail() {
       "rentalCart",
       JSON.stringify([...existingCart, cartItem])
     );
-    alert("Đã thêm vào giỏ hàng!");
+    message.success("Đã thêm vào giỏ hàng!");
   };
 
   if (!equipment) {
@@ -137,7 +153,7 @@ export default function ProductDetail() {
       <p className="text-lg mb-1">Serial: {equipment.serialNumber}</p>
       <p className="text-lg mb-1">Tình trạng: {equipment.status}</p>
       <p className="text-lg mb-1">Ghi chú: {equipment.notes}</p>
-      <p className="text-lg mb-4">Giá thuê/ngày: {equipment.dailyRate} USD</p>
+      <p className="text-lg mb-4">Giá thuê/ngày: {equipment.dailyRate} VND</p>
 
       {/* Bộ chọn ngày */}
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -172,7 +188,7 @@ export default function ProductDetail() {
       {/* Nút hành động */}
       <div className="flex gap-4">
         <button
-          onClick={handleRent}
+          onClick={confirmRent}
           disabled={loading}
           className="bg-gray-600 hover:bg-gray-400 text-white font-semibold px-6 py-2 rounded disabled:opacity-50"
         >

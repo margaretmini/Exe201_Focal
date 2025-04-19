@@ -22,11 +22,11 @@ export default function Equipment() {
     setLoading(true);
     try {
       const [equipRes, catRes] = await Promise.all([
-        equipmentApi.getAllEquipments(0, 10),
+        equipmentApi.getAllEquipments(), // ❗ Không truyền page/size nữa
         categoryApi.getAllCategories(),
       ]);
 
-      setEquipments(equipRes?.data?.data?.content || []);
+      setEquipments(equipRes?.data?.data || []); // ❗ Không cần .content
       setCategories(catRes?.data?.data || []);
     } catch (err) {
       console.error("❌ Error loading data:", err);

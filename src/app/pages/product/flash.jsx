@@ -12,16 +12,12 @@ export default function Flash() {
     const fetchEquipments = async () => {
       try {
         // Lấy page 0, size 100 để chắc chắn đủ data
-        const response = await equipmentApi.getAllEquipments(0, 100, "equipmentId");
-        console.log("📦 Full API response (Flash):", response);
-
-        // unwrap thêm 1 cấp data
-        const equipments = response?.data?.data?.content || [];
-        console.log("✅ Thiết bị lấy được (Flash):", equipments);
+        const response = await equipmentApi.getAllEquipments();
+        const equipments = response?.data?.data || [];
 
         // Lọc các thiết bị thuộc categoryId = 3 (Đèn Flash)
         const filtered = equipments.filter(
-          item => item?.category?.categoryId === 3
+          (item) => item?.category?.categoryId === 3
         );
         console.log("💡 Thiết bị Đèn Flash:", filtered);
 
@@ -93,8 +89,8 @@ export default function Flash() {
               </p>
               <p className="text-sm">
                 <strong>Giá thuê:</strong> 500.000 VND/ngày
-              </p> <br />
-
+              </p>{" "}
+              <br />
               <button
                 className="text-sm text-black hover:underline text-left underline cursor-pointer"
                 onClick={(e) => {

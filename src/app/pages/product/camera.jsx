@@ -22,12 +22,8 @@ export default function Camera() {
   useEffect(() => {
     const fetchEquipments = async () => {
       try {
-        const response = await equipmentApi.getAllEquipments(
-          0,
-          100,
-          "equipmentId"
-        );
-        const equipments = response?.data?.data?.content || [];
+        const response = await equipmentApi.getAllEquipments();
+        const equipments = response?.data?.data || [];
         const filtered = equipments
           .filter((item) => item?.category?.categoryId === 1) // Máy ảnh
           .map((item) => ({

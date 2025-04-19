@@ -67,7 +67,7 @@ export default function Landing() {
         {/* Section 1 */}
         <section
           ref={sectionRefs[0]}
-          className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]"
+          className="flex flex-col md:flex-row items-start gap-10 py-12 h-[700px]"
         >
           <div className="flex-1 slider-container relative">
             <div
@@ -130,7 +130,7 @@ export default function Landing() {
         {/* Section 2 */}
         <section
           ref={sectionRefs[1]}
-          className="flex flex-col md:flex-row items-start gap-10 py-12 h-[740px]"
+          className="flex flex-col md:flex-row items-start gap-10 py-12 h-[700px]"
         >
           <div className="flex-1 space-y-4 h-full overflow-y-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-black text-center">
@@ -190,7 +190,7 @@ export default function Landing() {
         </section>
 
         {/* Section 3 */}
-        <section ref={sectionRefs[2]} className="py-16 h-[680px]">
+        <section ref={sectionRefs[2]} className="py-16 h-[700px]">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold">SẢN PHẨM MỚI</h2>
             <Link to="/product" className="underline font-bold text-gray-800">

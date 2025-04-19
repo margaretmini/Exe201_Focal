@@ -25,18 +25,23 @@ export default function blog() {
       {data?.map((blog) => (
         <Link
           to={`/blog/${blog.id}`}
-          className="hover:shadow-2xl transition-all duration-300 hover:p-4 h-[640px] w-[380px]"
+          state={{ blog }}
+          key={blog.id}
+          className="hover:shadow-2xl transition-all duration-300 hover:p-4 h-[630px] w-[380px]"
         >
-          <div className="flex flex-col blog_container" key={blog.postId}>
+          <div className="flex flex-col blog_container">
             <img
               src={
                 blog?.image ||
                 "https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE="
               }
-            ></img>
+              alt="blog"
+            />
             <span>
               <p className="font-semibold py-6 truncate">{blog.title}</p>
-              <p className="line-clamp-4 text-gray-700">{blog.content}</p>
+              <p className="line-clamp-4 text-gray-700">
+                {blog.conclusion.content}
+              </p>
             </span>
           </div>
         </Link>

@@ -11,6 +11,7 @@ const ProfileForm = () => {
     email: "",
     phone: "",
     dateOfBirth: "",
+    address: "", // ✅ Thêm trường địa chỉ
   });
 
   const handleChange = (e) => {
@@ -24,7 +25,7 @@ const ProfileForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await userApi.updateProfile(data); // Gọi API cập nhật
+      const res = await userApi.updateProfile(data);
       messageApi.success("Cập nhật hoàn tất !");
     } catch (error) {
       console.error(
@@ -48,6 +49,7 @@ const ProfileForm = () => {
     };
     getProfile();
   }, []);
+
   return (
     <div className="w-full mx-auto py-10 pr-96 pl-40">
       {contextHolder}
@@ -102,6 +104,18 @@ const ProfileForm = () => {
             type="date"
             name="dateOfBirth"
             value={data?.dateOfBirth || ""}
+            onChange={handleChange}
+            className="w-full border-b border-black outline-none"
+          />
+        </div>
+
+        {/* ✅ Trường địa chỉ mới */}
+        <div>
+          <label className="block text-sm mb-1">Địa chỉ</label>
+          <input
+            type="text"
+            name="address"
+            value={data?.address || ""}
             onChange={handleChange}
             className="w-full border-b border-black outline-none"
           />

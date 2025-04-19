@@ -40,15 +40,15 @@ const DropDownUsername = () => {
         </Link>
       ),
     },
-    {
-      key: "3",
-      label: (
-        <Link to={`/profile/bargan`} className="flex flex-row gap-4">
-          <FileSearchOutlined />
-          Trả giá
-        </Link>
-      ),
-    },
+    // {
+    //   key: "3",
+    //   label: (
+    //     <Link to={`/profile/bargan`} className="flex flex-row gap-4">
+    //       <FileSearchOutlined />
+    //       Trả giá
+    //     </Link>
+    //   ),
+    // },
     {
       key: "4",
       label: (

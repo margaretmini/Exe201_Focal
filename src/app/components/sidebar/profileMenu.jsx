@@ -23,11 +23,11 @@ const Sidebar = () => {
             Đặt hàng
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/profile/bargan" className="hover:underline">
             Trả giá
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/profile/info" className="hover:underline">
             Hồ sơ
@@ -38,21 +38,21 @@ const Sidebar = () => {
             Trở thành người cho thuê
           </Link>
         </li> */}
-        <li>
+        {/* <li>
           <Link to="/profile/delivery" className="hover:underline">
             Địa chỉ giao hàng
           </Link>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <Link to="/profile/payment" className="hover:underline">
             Phương thức thanh toán
           </Link>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <Link to="/profile/chat" className="hover:underline">
             Tin nhắn
           </Link>
-        </li>
+        </li> */}
       </ul>
 
       <div className="mt-8">

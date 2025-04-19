@@ -1,31 +1,31 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 export default function blogDetail() {
+  const location = useLocation();
+  const blog = location.state?.blog;
+
+  const tipsString = blog.body?.content || "";
+  const tipsArray = tipsString.split(/(?=\d+\.\s)/g).map((tip) => tip.trim());
+  const isoString = blog.updatedAt;
+  const date = new Date(isoString);
+  
+  const formattedDate = `${String(date.getDate()).padStart(2, "0")}/${String(
+    date.getMonth() + 1
+  ).padStart(2, "0")}/${date.getFullYear()}`;
   return (
-    <div className="flex flex-col  px-20">
+    <div className="flex flex-col  px-20 ">
       <div className="flex flex-row justify-between flex-wrap">
         <div className="w-[700px] uppercase text-2xl">
-          <h2 className="font-semibold leading-11 mb-10">
-            MASTERING THE ART OF BALANCE: ACHIEVING PERFECT HARMONY IN
-            PROFESSIONAL PHOTOGRAPHY
+          <h2 className="font-semibold leading-11 mb-10 uppercase">
+            {blog.title}
           </h2>
-          <p className="mb-24 ">
-            In photography, balance is a fundamental principle that can make or
-            break an image. It’s not just about placing elements within the
-            frame; it’s about creating a sense of harmony that guides the
-            viewer’s eye and evokes an emotional response. When used
-            effectively, balance can turn a simple shot into a captivating
-            masterpiece.
-          </p>
-          <p>Written by: Memphis</p>
-          <p className="mb-6">Intro: Memphis</p>
-          <p> Published: August 26, 2024</p>
+          <p className="mb-24 uppercase">{blog.introduction?.content}</p>
+          <p>Written by: ADMIN</p>
+          <p> Published: {formattedDate}</p>
           <p className="mt-14">
-            What is Balance in Photography? <br></br> Balance in photography
-            refers to the distribution of visual weight in an image. This weight
-            can come from different elements such as colors, shapes, light, and
-            subject placement. Proper balance makes a photo feel stable and
-            complete, while poor balance can leave the viewer feeling unsettled.
+            {blog.introduction?.title} <br />
+            {blog.introduction?.content}
           </p>
         </div>
         <img
@@ -62,23 +62,14 @@ export default function blogDetail() {
           Freeman
         </span>
       </div>
-      <strong className="text-[24px] py-10">Types of Balance</strong>
+      <strong className="text-[24px] py-10">{blog.body?.title}</strong>
+
       <div className="inline text-[24px]">
-        <strong>Symmetrical Balance:</strong> In symmetrical balance, both sides
-        of the image are mirrored or nearly identical. This type of balance
-        creates a sense of order and stability. It’s often used in architectural
-        photography or portraits where the subject is centered. Think of classic
-        shots of buildings or landscapes with a perfect reflection.
+        {tipsArray.map((tip, index) => (
+          <p key={index}>{tip}</p>
+        ))}
       </div>
-      <div className="inline text-[24px]">
-        <strong>Asymmetrical Balance:</strong> Asymmetrical balance, on the
-        other hand, is more dynamic. It involves placing elements of different
-        visual weights at different points within the frame but still achieving
-        a sense of harmony. For example, a large subject on one side of the
-        frame can be balanced by a smaller object or negative space on the other
-        side. This type of balance often feels more natural and engaging.
-      </div>
-      <div className="inline text-[24px]">
+      {/* <div className="inline text-[24px]">
         <strong>Radial Balance:</strong> This occurs when elements radiate from
         a central point in the image. It’s commonly seen in circular patterns or
         shots where the eye is naturally drawn toward the center of the frame. A
@@ -117,20 +108,15 @@ export default function blogDetail() {
             harmony through light and shadow.
           </li>
         </ol>
-      </div>
-      <div className="flex flex-row justify-between items-end">
+      </div> */}
+      <div className="flex flex-row justify-between items-center pt-14">
         <img
           className="w-[552px] h-[657px] object-cover"
           src="https://images.unsplash.com/photo-1511762180596-d03b808430fe?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         />
         <div className="inline text-[24px] text-right w-[740px]">
-          <strong>Conclusion</strong>
-          <br /> Achieving balance in photography is an essential skill for
-          every photographer, whether you’re capturing portraits, landscapes, or
-          abstract images. It helps create a cohesive and appealing composition,
-          guiding the viewer’s eye through the frame and making your work stand
-          out. Mastering balance allows you to elevate your photography and
-          bring a sense of harmony to each shot.
+          <strong>{blog.conclusion?.title}</strong>
+          <br /> {blog.conclusion?.content}
         </div>
       </div>
     </div>

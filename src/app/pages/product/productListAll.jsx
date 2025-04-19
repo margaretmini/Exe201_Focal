@@ -8,6 +8,7 @@ export default function ProductListAll() {
   const navigate = useNavigate();
   const [equipmentList, setEquipmentList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [wishlistEquipmentIds, setWishlistEquipmentIds] = useState([]);
 
   const fallbackImages = [
     "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=2070&auto=format&fit=crop",
@@ -29,18 +30,44 @@ export default function ProductListAll() {
   };
 
   const handleAddToWishlist = async (equipmentId) => {
+    if (wishlistEquipmentIds.includes(equipmentId)) {
+      alert("Thiết bị này đã có trong danh sách yêu thích! ❤️");
+      return;
+    }
+
     try {
-      const payload = { equipmentId }; // Payload gửi lên server
-      const response = await wishListApi.createWishItem(payload); // Gọi API
+      const payload = { equipmentId };
+      const response = await wishListApi.createWishItem(payload);
 
       if (response?.data?.status === "success") {
         alert("Đã thêm vào danh sách yêu thích!");
+        setWishlistEquipmentIds((prev) => [...prev, equipmentId]);
       } else {
         alert("Thêm thất bại. Vui lòng thử lại!");
       }
     } catch (error) {
       console.error("❌ Lỗi khi thêm vào wishlist:", error);
       alert("Đã có lỗi xảy ra khi thêm vào danh sách yêu thích.");
+    }
+  };
+
+  const handleRemoveFromWishlist = async (equipmentId) => {
+    const confirm = window.confirm("Bạn có muốn bỏ thích thiết bị này?");
+    if (!confirm) return;
+
+    try {
+      const response = await wishListApi.deleteWishItem(equipmentId);
+      if (response?.data?.status === "success") {
+        alert("Đã bỏ thích thiết bị.");
+        setWishlistEquipmentIds((prev) =>
+          prev.filter((id) => id !== equipmentId)
+        );
+      } else {
+        alert("Không thể bỏ thích. Vui lòng thử lại.");
+      }
+    } catch (error) {
+      console.error("❌ Lỗi khi bỏ thích:", error);
+      alert("Đã xảy ra lỗi khi bỏ thích.");
     }
   };
 
@@ -53,7 +80,14 @@ export default function ProductListAll() {
           ...item,
           imageUrl: item.imageUrl?.trim() || getRandomFallbackImage(),
         }));
-        setEquipmentList(enrichedEquipments);
+
+        const sortedEquipments = enrichedEquipments.sort((a, b) => {
+          if (a.status === "AVAILABLE" && b.status !== "AVAILABLE") return -1;
+          if (a.status !== "AVAILABLE" && b.status === "AVAILABLE") return 1;
+          return 0;
+        });
+
+        setEquipmentList(sortedEquipments);
       } catch (error) {
         console.error("❌ Lỗi khi load sản phẩm:", error);
         setEquipmentList([]);
@@ -62,7 +96,19 @@ export default function ProductListAll() {
       }
     };
 
+    const fetchWishlist = async () => {
+      try {
+        const response = await wishListApi.wishList();
+        const wishlist = response?.data?.data || [];
+        const wishlistIds = wishlist.map((item) => item.equipmentId);
+        setWishlistEquipmentIds(wishlistIds);
+      } catch (error) {
+        console.error("❌ Lỗi khi load wishlist:", error);
+      }
+    };
+
     fetchEquipments();
+    fetchWishlist();
   }, []);
 
   if (loading) return <LoadingSpinner />;
@@ -85,12 +131,22 @@ export default function ProductListAll() {
           {/* Nút Thích */}
           <div
             onClick={(e) => {
-              e.stopPropagation(); // không bị trigger click card
-              handleAddToWishlist(equipment.equipmentId); // 👈 gọi API thêm wishlist
+              e.stopPropagation();
+              if (wishlistEquipmentIds.includes(equipment.equipmentId)) {
+                handleRemoveFromWishlist(equipment.equipmentId);
+              } else {
+                handleAddToWishlist(equipment.equipmentId);
+              }
             }}
-            className="absolute top-2 right-2 text-sm text-black hover:underline cursor-pointer z-10 underline"
+            className={`absolute top-2 right-2 text-sm z-10 cursor-pointer ${
+              wishlistEquipmentIds.includes(equipment.equipmentId)
+                ? "text-red-500 font-bold"
+                : "text-black hover:underline underline"
+            }`}
           >
-            Thích
+            {wishlistEquipmentIds.includes(equipment.equipmentId)
+              ? "♥ Đã thích"
+              : "Thích"}
           </div>
 
           {/* Nội dung chính */}
@@ -98,7 +154,6 @@ export default function ProductListAll() {
             onClick={() => navigate(`/product/${equipment.equipmentId}`)}
             className="cursor-pointer flex flex-col h-full"
           >
-            {/* Phần đầu: ảnh + tiêu đề */}
             <div>
               <img
                 src={equipment.imageUrl}
@@ -107,14 +162,13 @@ export default function ProductListAll() {
                   e.target.src = getRandomFallbackImage();
                 }}
                 alt={`${equipment.brand} ${equipment.model}`}
-                className="mx-auto h-60 object-contain rounded-lg"
+                className="mx-auto h-60 object-contain rounded-lg mt-4"
               />
               <h2 className="text-xl font-semibold text-center text-wrap text-balance text-black mt-2">
                 {equipment.brand} {equipment.model}
               </h2>
             </div>
 
-            {/* Phần dưới: tự đẩy xuống cùng vị trí ở tất cả card */}
             <div className="mt-auto grid grid-rows-6 gap-1 pt-4 text-center">
               <p className="text-sm">
                 <strong>Serial:</strong> {equipment.serialNumber}
@@ -129,16 +183,6 @@ export default function ProductListAll() {
               <p className="text-sm">
                 <strong>Giá thuê:</strong> {equipment.dailyRate} VND/Ngày
               </p>
-              <br />
-              <button
-                className="text-sm text-black hover:underline text-left underline cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  console.log("🛒 Thêm vào giỏ hàng:", equipment.equipmentId);
-                }}
-              >
-                Thêm vào giỏ hàng
-              </button>
             </div>
           </div>
         </div>

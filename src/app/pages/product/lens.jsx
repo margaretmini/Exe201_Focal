@@ -45,20 +45,25 @@ export default function Lens() {
   useEffect(() => {
     const fetchEquipments = async () => {
       try {
-        // Lấy page 0, size 100 để chắc chắn đủ data
         const response = await equipmentApi.getAllEquipments();
         const equipments = response?.data?.data || [];
-
-        // Lọc các thiết bị thuộc categoryId = 2 (Ống kính)
+    
         const filtered = equipments
-          .filter((item) => item?.category?.categoryId === 2) // Máy ảnh
+          .filter((item) => item?.category?.categoryId === 1) // Máy ảnh
           .map((item) => ({
             ...item,
             imageUrl: item.imageUrl?.trim() || getRandomFallbackImage(),
-          }));
+          }))
+          .sort((a, b) => {
+            // Nếu a.available và b.not available => a đứng trước
+            if (a.status === "AVAILABLE" && b.status !== "AVAILABLE") return -1;
+            if (a.status !== "AVAILABLE" && b.status === "AVAILABLE") return 1;
+            return 0; // Giữ nguyên nếu giống nhau
+          });
+    
         setEquipmentList(filtered);
       } catch (error) {
-        console.error("❌ Lỗi khi load Lens:", error);
+        console.error("❌ Lỗi khi load sản phẩm:", error);
         setEquipmentList([]);
       } finally {
         setLoading(false);

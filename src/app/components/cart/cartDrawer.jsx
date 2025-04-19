@@ -71,7 +71,7 @@ const CartDrawer = () => {
                     {item.model || "Không rõ thiết bị"}
                   </p>
                   <p className="text-[#0B0B0B] w-[170px] pt-2">
-                    Giá thuê: {item.dailyRate?.toLocaleString() || "N/A"}đ/ngày
+                    Giá thuê: {item.dailyRate?.toLocaleString() || "N/A"}VND/ngày
                   </p>
                 </div>
               </div>

@@ -20,7 +20,7 @@ const Sidebar = () => {
         </li>
         <li>
           <Link to="/profile/order" className="hover:underline">
-            Đặt hàng
+            Đang thuê
           </Link>
         </li>
         {/* <li>

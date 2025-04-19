@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import wishlistApi from "../../api/wishListApi";
+import { Link } from "react-router-dom";
 
 const Favorite = () => {
   const [cardData, setCardData] = useState([]);
@@ -71,7 +72,10 @@ const CameraCard = ({
   onRemove,
 }) => {
   return (
-    <div className="border h-60 w-[400px] p-4 flex flex-col justify-between text-sm">
+    <Link
+      to={`/product/${id}`}
+      className="border h-60 w-[400px] p-4 flex flex-col justify-between text-sm hover:scale-105 transition duration-300"
+    >
       {/* Header */}
       <div className="flex justify-between items-start">
         <div className="font-semibold">
@@ -86,7 +90,7 @@ const CameraCard = ({
       {/* Content */}
       <div className="flex gap-4 mt-4">
         <img src={image} alt="camera" className="w-72 h-20 object-cover" />
-        <div className="border p-2 text-xs leading-relaxed w-full">
+        <div className="border p-2 text-xs leading-relaxed w-full rounded-xl border-gray-300">
           <div className="font-semibold">Tiền cọc: {replacementValue} đ</div>
           <div>
             Giá thuê: <span className="font-semibold">{amount}đ/1 ngày</span>
@@ -96,13 +100,10 @@ const CameraCard = ({
       </div>
 
       {/* Footer */}
-      <div
-        className="text-xs text-right mt-2 underline cursor-pointer text-red-500"
-        onClick={() => onRemove(id)}
-      >
-        Bỏ thích
+      <div className="text-xs text-right mt-2 underline cursor-pointer text-red-500">
+        <button onClick={() => onRemove(id)}>Bỏ thích</button>
       </div>
-    </div>
+    </Link>
   );
 };
 

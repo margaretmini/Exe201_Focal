@@ -8,7 +8,7 @@ export default function Register() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    birthDate: "",
+    // birthDate: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -91,13 +91,13 @@ export default function Register() {
             value={formData.lastName}
             onChange={handleChange}
           />
-          <Input
+          {/* <Input
             name="birthDate"
             placeholder="NGÀY SINH"
             className="register_input"
             value={formData.birthDate}
             onChange={handleChange}
-          />
+          /> */}
           <Input
             name="email"
             placeholder="EMAIL"

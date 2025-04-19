@@ -16,7 +16,8 @@ const DropDownUsername = () => {
   const logout = () => {
     localStorage.removeItem("undecodeToken");
     localStorage.removeItem("decodeToken");
-    navigate("/");
+    window.location.reload();
+    navigate("/login");
   };
 
   const email = JSON.parse(localStorage.getItem("decodeToken"));
@@ -36,7 +37,7 @@ const DropDownUsername = () => {
       label: (
         <Link to={`/profile/order`} className="flex flex-row gap-4">
           <ShoppingCartOutlined />
-          Đặt hàng
+          Đang thuê
         </Link>
       ),
     },

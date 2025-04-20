@@ -58,7 +58,7 @@ const CartDrawer = () => {
   return (
     <>
       <button onClick={showDrawer} className="hover_transaction_section">
-        Giỏ hàng
+        Yêu thích
       </button>
 
       <Drawer

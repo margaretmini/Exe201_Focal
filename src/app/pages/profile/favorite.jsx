@@ -5,6 +5,27 @@ import { Link } from "react-router-dom";
 const Favorite = () => {
   const [cardData, setCardData] = useState([]);
 
+  // Mảng ảnh ngẫu nhiên
+  const fallbackImages = [
+    "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1651922985926-c8fb8c1fe8c4?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1574494461515-c8005821fbe5?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1495707902641-75cac588d2e9?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?q=80&w=2076&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1519458246479-6acae7536988?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1536627217140-899b0bc9d881?q=80&w=2076&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1486574655068-162e94137442?q=80&w=2070&auto=format&fit=crop",
+  ];
+
+  // Hàm lấy ảnh ngẫu nhiên
+  const getRandomImage = () => {
+    const index = Math.floor(Math.random() * fallbackImages.length);
+    return fallbackImages[index];
+  };
+
   useEffect(() => {
     fetchWishlist();
   }, []);
@@ -26,7 +47,8 @@ const Favorite = () => {
         amount: item.dailyRate,
         time: item.notes,
         brand: item.brand,
-        image: item.primaryImageUrl || "https://via.placeholder.com/150",
+        // Nếu không có image, sử dụng ảnh ngẫu nhiên
+        image: item.primaryImageUrl?.trim() || getRandomImage(),
       }));
 
       setCardData(transformed);

@@ -6,6 +6,25 @@ const CartDrawer = () => {
   const [openCart, setOpenCart] = useState(false);
   const [wishlist, setWishlist] = useState([]);
 
+  const fallbackImages = [
+    "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1651922985926-c8fb8c1fe8c4?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1574494461515-c8005821fbe5?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1495707902641-75cac588d2e9?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?q=80&w=2076&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1519458246479-6acae7536988?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1500634245200-e5245c7574ef?q=80&w=2070&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1536627217140-899b0bc9d881?q=80&w=2076&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1486574655068-162e94137442?q=80&w=2070&auto=format&fit=crop",
+  ];
+
+  const getRandomImage = () => {
+    const index = Math.floor(Math.random() * fallbackImages.length);
+    return fallbackImages[index];
+  };
+
   const showDrawer = () => {
     setOpenCart(true);
   };
@@ -60,10 +79,8 @@ const CartDrawer = () => {
                 key={item.equipmentId}
               >
                 <img
-                  src={
-                    item.primaryImageUrl || "https://via.placeholder.com/120"
-                  }
-                  className="w-[120px] h-[100px] object-cover"
+                  src={item.primaryImageUrl?.trim() || getRandomImage()}
+                  className="w-[120px] h-[100px] object-cover p-2" // Thêm padding cho ảnh
                   alt={item.model || "Không có tên"}
                 />
                 <div>
